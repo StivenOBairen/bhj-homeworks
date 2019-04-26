@@ -1,15 +1,19 @@
 
-const modalMain = document.getElementById('modal_main'),
+const textBlocks = document.querySelectorAll('div'),
+      modalMain = document.getElementById('modal_main'),
       modalSuccess = document.getElementById('modal_success'),
-      showSuccessBtn = document.querySelector('.show-success'),
+      showSuccessBtn = document.querySelector('.btn'),
       closeBtn = document.querySelectorAll('.modal__close');
 
-
-document.addEventListener('click', () => {
-  if(!modalMain.classList.contains('modal_active')){
-    modalMain.classList.add('modal_active');
-  }
-});
+      for(let i = 0; i < textBlocks.length; i++) {
+      	textBlocks[i].addEventListener('click', (e) => {
+      		if(!e.target.classList.contains('modal') &&
+      			!e.target.classList.contains('modal__close') &&
+      			!modalSuccess.classList.contains('modal_active')) {
+      			modalMain.classList.add('modal_active');
+      		}
+      	});
+      }
 
 showSuccessBtn.addEventListener('click', () => {
   	modalMain.classList.remove('modal_active');
