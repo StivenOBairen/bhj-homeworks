@@ -1,18 +1,20 @@
 
-const menuLinks = document.querySelectorAll("a.menu__link");
+const menuLinks = document.querySelectorAll('.menu__link');
 
-for (let link of Array.from(menuLinks)) {
-  link.onclick = function() {
-    const parent = link.parentElement;
+for (let i = 0; i < menuLinks.length; i++) {
+    menuLinks[i].addEventListener('click', (e) => {
+  		const link = e.target;
+  		const ul = link.parentNode.childNodes[3];
 
-      if (!parent.querySelector(".menu_sub").classList.contains("menu_active")) {
-          parent.querySelector('.menu_sub').classList.add("menu_active");
-      } else {
-        parent.querySelector('.menu_sub').classList.remove("menu_active");
-      }
-
-      if (link.closest('.menu_main')) {
-        return false;
-      }
+      if (ul) {
+  			e.preventDefault();
+  			let uls = document.querySelectorAll('.menu_active');
+  			if(uls) {
+  				for(let i = 0; i < uls.length; i++) {
+  					uls[i].classList.remove('menu_active');
+  				}
+  			}
+  			ul.classList.add('menu_active');
+  		}
+  	});
   }
-}
